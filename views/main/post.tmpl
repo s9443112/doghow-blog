@@ -1,0 +1,97 @@
+ {{ define "css"  }} 
+ <link rel="stylesheet" href="/static/assets/css/bootstrap-editable.css" />
+
+ {{ end }}
+
+{{ define "main" }}
+<div id="main">
+<h3>新增公告</h3>
+<form method="POST" action="/api/post">
+  <input type="hidden" name="action" value="insert"/>
+   <div class="form-group">   
+     
+      <label for="ann_title">標題
+        <input type="text" class="form-control" id="ann_title" name="ann_title" aria-describedby="text" placeholder="輸入 標題" required>
+      </label>
+      
+
+      <label for="ann_time">發佈時間
+        <!-- <div class="input-group date" data-provide="datepicker"> -->
+        <input type="text" class="form-control" id="ann_time" name="ann_time" aria-describedby="text" required>
+        <!-- </div> -->
+      </label>
+
+    </div>
+  <div class="form-group">
+    <label for="ann_content">內容</label>
+    <textarea class="form-control" id="ann_content" name="ann_content" rows="4"></textarea required>
+  </div>
+  <div class="form-group">   
+      <button type="submit" style="float: right;" class="btn btn-primary m-1">新增到資料庫</button>
+    </div>
+</form>
+</div>
+{{ end }}
+
+{{ define "script" }}
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+ <script src="/static/assets/js/bootstrap-editable.min.js"></script>
+  <script src="/static/ckeditor/ckeditor.js"></script>
+  <script>
+    $(document).ready(function () {
+
+      $(".nav li").removeClass("active");
+      $('#postMain').addClass('active');
+      $('#ann_time').focus(function(){
+        $(this).val(getTimeString());
+      });
+
+      $.fn.editable.defaults.mode = 'popup';
+
+      //make editable
+     
+      
+
+      CKEDITOR.replace('ann_content', {
+               skin: 'office2013'
+      });
+      
+    });
+
+
+
+    $("a[name='delete']").on('click',function(){
+      if(confirm("確定刪除？")){
+        var data = $(this).parent().serialize();
+        var result = post('/postMain',data);
+        document.getElementById('myTable').deleteRow(($(this).data('position')));
+      }
+    });
+
+
+    function post(path,data){
+      $.ajax({
+          url: path,
+          type: 'POST',
+          data: data,
+          success: function(result) {
+            return true;
+          },
+          error : function(result){
+            return result;
+          }
+      });
+    }        
+  </script>
+
+
+
+  <style>
+    table{table-layout:fixed;}
+  
+    td {
+      overflow: hidden; white-space:nowrap; text-overflow:ellipsis;
+    }
+  </style>
+{{ end }}

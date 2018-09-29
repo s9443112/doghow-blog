@@ -1,6 +1,7 @@
 package model
 
 import (
+	"html/template"
 	"time"
 
 	"github.com/jinzhu/gorm"
@@ -8,12 +9,10 @@ import (
 
 type DataPreview struct {
 	gorm.Model
-	URL        string `type:varchar(100);gorm:"unique"`
 	Title      string
+	Vice_title string
 	PublicTime time.Time
-	Grade      string
-	Tag        string
-	PImg       string
-	Content    string
-	ImgJSON    string
+	User       string
+	ImgURL     template.HTML
+	Content    template.HTML
 }

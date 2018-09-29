@@ -12,6 +12,7 @@ import (
 type Service struct {
 	db          *gorm.DB
 	Information *Information
+	Preview     *Preview
 }
 
 func New() *Service {
@@ -27,9 +28,13 @@ func New() *Service {
 	info := &Information{
 		db: db,
 	}
+	preview := &Preview{
+		db: db,
+	}
 	return &Service{
 		db:          db,
 		Information: info,
+		Preview:     preview,
 	}
 }
 

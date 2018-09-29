@@ -1,0 +1,45 @@
+stderr: # doghow-blog/vendor/controller
+vendor/controller/api.go:28:14: undefined: cate
+, cmd err: exit status 2stderr: # doghow-blog/vendor/model
+vendor/model/dbpreview.go:16:13: syntax error: unexpected type, expecting type
+, cmd err: exit status 2stderr: # doghow-blog/vendor/model
+vendor/model/dbpreview.go:16:13: undefined: text
+, cmd err: exit status 2stderr: # doghow-blog/vendor/controller
+vendor/controller/api.go:34:22: not enough arguments in call to db.Preview.CreateOne
+	have ()
+	want (*model.DataPreview)
+, cmd err: exit status 2stderr: # doghow-blog/vendor/controller
+vendor/controller/api.go:34:22: not enough arguments in call to db.Preview.CreateOne
+	have ()
+	want (*model.DataPreview)
+, cmd err: exit status 2stderr: # doghow-blog/vendor/controller
+vendor/controller/api.go:33:10: syntax error: unexpected {, expecting expression
+vendor/controller/api.go:34:2: syntax error: non-declaration statement outside function body
+, cmd err: exit status 2stderr: # doghow-blog/vendor/controller
+vendor/controller/api.go:33:10: syntax error: unexpected {, expecting expression
+vendor/controller/api.go:34:2: syntax error: non-declaration statement outside function body
+, cmd err: exit status 2stderr: # doghow-blog/vendor/controller
+vendor/controller/api.go:33:10: syntax error: unexpected {, expecting expression
+vendor/controller/api.go:34:2: syntax error: non-declaration statement outside function body
+, cmd err: exit status 2stderr: # doghow-blog/vendor/controller
+vendor/controller/api.go:33:10: syntax error: unexpected {, expecting expression
+vendor/controller/api.go:34:2: syntax error: non-declaration statement outside function body
+, cmd err: exit status 2stderr: # doghow-blog/vendor/controller
+vendor/controller/api.go:33:10: syntax error: unexpected {, expecting expression
+vendor/controller/api.go:34:2: syntax error: non-declaration statement outside function body
+, cmd err: exit status 2stderr: # doghow-blog/vendor/controller
+vendor/controller/api.go:34:79: cannot use ann_time (type string) as type time.Time in field value
+vendor/controller/api.go:35:20: too many arguments in call to database.New
+	have (*model.DataPreview)
+	want ()
+vendor/controller/api.go:36:22: not enough arguments in call to db.Preview.CreateOne
+	have ()
+	want (*model.DataPreview)
+, cmd err: exit status 2stderr: # doghow-blog/vendor/controller
+vendor/controller/api.go:34:79: cannot use ann_time (type string) as type time.Time in field value
+, cmd err: exit status 2stderr: # doghow-blog/vendor/controller
+vendor/controller/api.go:28:24: not enough arguments in call to time.Parse
+	have (string)
+	want (string, string)
+vendor/controller/api.go:28:24: multiple-value time.Parse() in single-value context
+, cmd err: exit status 2
