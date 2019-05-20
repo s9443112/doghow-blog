@@ -13,12 +13,13 @@ import (
 func AuthRequired() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		config := configloader.New("config.yaml")
-		githubLogin, _ := c.Request.Cookie("github_login")
-		githubToken, _ := c.Request.Cookie("github_token")
-		if githubLogin != nil && githubToken != nil {
+		githubLogin,_ := c.Request.Cookie("github_login")
+		githubToken,_ := c.Request.Cookie("github_token")
+
+		if githubLogin != nil &&githubToken !=nil {
 			orgContent := githubauth.ContentProvider{Name: githubLogin.Value, Token: githubToken.Value, OrgName: config.Github.OrgName}
-			code := githubauth.GetOrg(&orgContent)
-			if code != 200 {
+			statuscode := githubauth.GetOrg(&orgContent)
+			if statuscode != 200 {
 				expiration := time.Unix(0, 0)
 				logincookie := http.Cookie{Name: "github_login", Value: "", Path: "/", Expires: expiration}
 				tokencookie := http.Cookie{Name: "github_token", Value: "", Path: "/", Expires: expiration}
@@ -32,12 +33,12 @@ func AuthRequired() gin.HandlerFunc {
 				return
 			}
 			c.Next()
-		} else {
 
+		}else {
 			keyContent := githubauth.ContentProvider{ClientID: config.Github.ClientID}
-			c.Redirect(302, githubauth.GetGitHubAuth(&keyContent))
+			c.Redirect(302,githubauth.GetGithubAuth(&keyContent))
 			c.Abort()
-			return
+			return 
 		}
 
 	}
@@ -48,7 +49,7 @@ func AuthGithubCallback() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		config := configloader.New("config.yaml")
 		code := c.Query("code")
-		key := githubauth.ContentProvider{Code: code, ClientID: config.Github.ClientID, SecretKey: config.Github.SecretKey}
+		key := githubauth.ContentProvider{Code: code, ClientID: config.Github.ClientID ,SecretKey: config.Github.SecretKey}
 		accesstoken := githubauth.GetToken(&key)
 		username := githubauth.GetUsername(accesstoken)
 		expiration := time.Now().Add(1 * time.Hour)

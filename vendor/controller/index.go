@@ -8,11 +8,10 @@ import (
 )
 
 func Index(c *gin.Context) {
-
 	db := database.New()
-	info := db.Preview.QueryLimit(5)
+	story := db.Story.QueryAll()
 	c.HTML(http.StatusOK, "main/index", gin.H{
-		"info": info,
+		"story": story,
 	})
 }
 

@@ -1,10 +1,14 @@
 package model
 
-import "github.com/jinzhu/gorm"
+import (
+	"github.com/jinzhu/gorm"
+)
 
-type DataInfo struct {
+type DateInfo struct {
 	gorm.Model
-	URL     string `type:varchar(100);gorm:"unique"`
-	Title   string
+	Name string
+	Birth string
+	Email string
 	Content string
+	Github string `unique:gorm`
 }

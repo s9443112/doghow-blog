@@ -4,9 +4,8 @@ import (
 	"controller"
 	"database"
 	"fmt"
-	"middleware"
 	"os"
-
+	"middleware"
 	"github.com/gin-gonic/gin"
 	eztemplate "github.com/michelloworld/ez-gin-template"
 )
@@ -27,19 +26,14 @@ func main() {
 
 			route.HTMLRender = render.Init()
 			route.GET("/", controller.Index)
-			route.GET("/info", controller.Info)
-			route.GET("/login", controller.Login)
-			route.GET("post", controller.Post)
-			route.POST("/testapi", controller.Testapi)
-			route.POST("/api/login", controller.Api_Login)
-			route.POST("/api/post", controller.Api_Post)
+			route.POST("/api",controller.AddInfo)
 
-			//route.GET("/oauth/callback", middleware.AuthGith2ubCallback(), controller.OauthCallback)
+			route.GET("/oauth/callback",middleware.AuthGithubCallback(),controller.OauthCallback)
+			
 			adminGroup := route.Group("/admin")
-
 			adminGroup.Use(middleware.AuthRequired())
 			{
-				adminGroup.GET("/", controller.Index)
+				adminGroup.GET("/", controller.AdminIndex)
 			}
 
 			route.Run()

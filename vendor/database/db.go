@@ -11,8 +11,8 @@ import (
 
 type Service struct {
 	db          *gorm.DB
-	Information *Information
-	Preview     *Preview
+	Story 		*Story
+	Information 	*Information
 }
 
 func New() *Service {
@@ -25,23 +25,24 @@ func New() *Service {
 	}
 	db.SingularTable(true) //不會幫你把table name +s
 
+	story := &Story{
+		db: db,
+	}
+
 	info := &Information{
-		db: db,
+		db:db,
 	}
-	preview := &Preview{
-		db: db,
-	}
+
 	return &Service{
-		db:          db,
+		db:			db,
+		Story: 		story,
 		Information: info,
-		Preview:     preview,
 	}
 }
 
 func (s *Service) InitDatabase() {
-	s.db.AutoMigrate(&model.DataInfo{})
-	s.db.AutoMigrate(&model.DataPreview{})
-	s.db.AutoMigrate(&model.DataProfile{})
+	s.db.AutoMigrate(&model.DataStory{})
+	s.db.AutoMigrate(&model.DateInfo{})
 }
 
 func (s *Service) CloseDBConnect() {
