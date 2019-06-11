@@ -21,6 +21,9 @@ type Config struct {
 		SSLMode  string
 		Password string
 	}
+	ServerSet struct {
+		Httpport	int
+	}
 }
 
 //New Func

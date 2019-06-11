@@ -29,9 +29,7 @@ func GetGithubAuth(c *ContentProvider) string {
 	buffer.WriteString(githubBase)
 	buffer.WriteString("?client_id=")
 	buffer.WriteString(c.ClientID)
-	fmt.Println("=======================================")
-	fmt.Println(c.ClientID)
-	fmt.Println("=======================================")
+
 	buffer.WriteString("&scope=user%20admin:org%20repo&allow_singup=false")
 	return buffer.String()
 }
@@ -47,10 +45,7 @@ func GetOrg(c *ContentProvider) int {
 	urlbuffer.WriteString(c.OrgName)
 	urlbuffer.WriteString("/memberships/")
 	urlbuffer.WriteString(c.Name)
-	fmt.Println("=======================================")
-	fmt.Println(urlbuffer.String())
-	fmt.Println(tokenbuffer.String())
-	fmt.Println("=======================================")
+	
 	resp,_,_ :=gorequest.New().Get(urlbuffer.String()).Set("Authorization", tokenbuffer.String()).End()
 	
 	return resp.StatusCode

@@ -18,6 +18,21 @@
     <title>jajane.c website</title>
 
     <link href="/static/assets/css/main.82cfd66e.css" rel="stylesheet"></head>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!--Socket import -->
+     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.4/socket.io.js"></script>
+     <!--Socket script -->
+    <script>
+        $(document).ready(function () {
+            
+
+            let socket = io.connect("http://localhost:8000/socket.io/")
+
+             socket.on("connect", function () {
+                 console.log("succeced")
+             })
+        })
+        </script>
 
   <body>
 

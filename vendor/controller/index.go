@@ -21,3 +21,11 @@ func Login(c *gin.Context) {
 func Post(c *gin.Context) {
 	c.HTML(http.StatusOK, "main/post", gin.H{})
 }
+
+func Story(c *gin.Context) {
+	c.HTML(http.StatusOK, "main/story",gin.H{})
+}
+
+func NoRoute(c *gin.Context) {
+	c.JSON(http.StatusNotFound,gin.H{"code":404,"message":"No this page ERROR"})
+}
